@@ -11,8 +11,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "kafka")
 public class GreetingController {
-    @Autowired
-    private KafkaProducer kafkaProducer;
+//    @Autowired
+//    private KafkaProducer kafkaProducer;
 
 //    @Autowired
 //    private KafkaTemplate<String, String> kafkaProducer;
@@ -23,8 +23,8 @@ public class GreetingController {
         return "greetings";
     }
 
-    @PostMapping(value = "publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
-        this.kafkaProducer.sendMessage(message);
-    }
+//    @PostMapping(value = "publish")
+//    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
+//        this.kafkaProducer.sendMessage(message);
+//    }
 }
