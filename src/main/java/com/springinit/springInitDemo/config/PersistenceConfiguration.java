@@ -11,8 +11,9 @@
 //    @Bean
 //    public DataSource dataSource() {
 //        DataSourceBuilder builder = DataSourceBuilder.create();
-//        builder.url("jdbc:mysql://localhost:3306/conference_demo");
-//        builder.username("root");
+//        builder.driverClassName("org.postgresql.Driver");
+//        builder.url("jdbc:postgres://localhost:5432/conference_demo");
+//        builder.username("postgres");
 //        builder.password("root");
 //        System.out.println("My custom database bean");
 //        return builder.build();
