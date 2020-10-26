@@ -15,7 +15,6 @@
 //        builder.url("jdbc:postgres://localhost:5432/conference_demo");
 //        builder.username("postgres");
 //        builder.password("root");
-//        System.out.println("My custom database bean");
 //        return builder.build();
 //    }
 //}
