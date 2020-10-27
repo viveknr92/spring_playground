@@ -7,6 +7,7 @@ import com.springinit.springInitDemo.model.Session;
 import com.springinit.springInitDemo.model.User;
 import com.springinit.springInitDemo.repository.UserRepository;
 import com.springinit.springInitDemo.service.MyUserDetailsService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -38,7 +40,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return ("<h1>Welcome</h1>");
+        return ("<h1>Welcome Home</h1>");
     }
 
     @PostMapping ("/login")
@@ -60,6 +62,17 @@ public class HomeController {
         return ("<h1>Welcome User</h1>");
     }
 
+    @GetMapping("/users")
+    public List<User> users() {
+        return userRepository.findAll();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public List<User> users(@PathVariable Integer id) {
+        userRepository.deleteById(id);
+        return userRepository.findAll();
+    }
+
     @GetMapping("/admin")
     public String admin() {
         return ("<h1>Welcome Admin</h1>");
@@ -69,5 +82,12 @@ public class HomeController {
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody final User user) {
         return userRepository.saveAndFlush(user);
+    }
+
+    @PutMapping("/users/{id}")
+    public User update(@PathVariable Integer id, @RequestBody User user) {
+        User existingUser = userRepository.getOne(id);
+        BeanUtils.copyProperties(user, existingUser, "id");
+        return userRepository.saveAndFlush(existingUser);
     }
 }
